@@ -16,4 +16,7 @@
 ### 4일차 교육 
 + 데이터 정제
 
+## PostgreSQL Document 
++ https://www.postgresql.org/docs/14/
+
 ## Learnning SQL 
