@@ -1,4 +1,5 @@
-# SQL-Study
+# 빅데이터센터 SQL-Study
+![포스터](./images/poster.png)
 
 ### 1일차 교육 
 1. 배경    
