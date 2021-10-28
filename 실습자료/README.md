@@ -9,4 +9,4 @@
 4. DBeaver를 실행후 SQL Editor 열기 
 >  SQL편집기 -> New Script -> 마우스 오른쪽 클릭 -> 파일 -> SQL 스크립트 불러오기  
 > C:\Temp\dvdrental\restore_bigdatacenter.sql 선택후 열기 
-5. SQL script 모두 실행    
+5. SQL cript 모두 실행    
