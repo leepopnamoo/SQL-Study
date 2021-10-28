@@ -1,6 +1,6 @@
 # 빅데이터센터 SQL-Study
-![포스터](./images/poster.png)
-
+![포스터](./images/poster.png)   
+--- 
 ### 1일차 교육 
 1. 배경    
 2. 데이터베이스 생성과 데이터 추가    
