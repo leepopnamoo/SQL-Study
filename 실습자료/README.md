@@ -11,3 +11,6 @@
 >  SQL편집기 -> New Script -> 마우스 오른쪽 클릭 -> 파일 -> SQL 스크립트 불러오기  
 > C:\Temp\dvdrental\restore_bigdatacenter.sql 선택후 열기 
 5. SQL Script 모두 실행    
+
+## ERD 
+![ERD](../images/dvd-rental-sample-database-diagram.png) 
