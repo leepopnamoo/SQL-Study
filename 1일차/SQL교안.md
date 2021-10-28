@@ -32,6 +32,12 @@
 4. DCL – Data Control Language : GRANT   
 5. DTL - Data Transaction Language : COMMIT    
 
+## 1.2.2 비절차적 언어인 SQL   
+> SQL의 실행은 옵티마이저라는 데이터베이스 엔진에서 담당함. 
+> 사용자가 직접 힌트를 지정함으로써 옵티마이저의 결정에 영향을 줄 수 있음. (PostgreSQL 엔트프라이즈 DB와 같은 힌트기능 없음) 
+![쿼리플랜보기](../images/sql_excute_plan.jpg)
+
+
 # Install PostgreSQL :: Database Server 
 1. 설치 파일 다운로드 :   
   <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads> 
