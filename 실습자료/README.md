@@ -7,6 +7,6 @@
 2. dvdrental.zip 압축 파일을 C:\Temp 폴더에 압축풀기 
 3. C:\Temp\dvdrental\ 폴더에 sql, dat 파일이 있는지 확인 **(폴더 위치 꼭 확인)**
 4. DBeaver를 실행후 SQL Editor 열기 
-5. SQL Editor에서 파일 불러오기 선택 
-6. C:\Temp\dvdrental\restore_bigdatacenter.sql 선택후 열기 
-7. SQL script 모두 실행    
+>  SQL편집기 -> New Script -> 마우스 오른쪽 클릭 -> 파일 -> SQL 스크립트 불러오기  
+> C:\Temp\dvdrental\restore_bigdatacenter.sql 선택후 열기 
+5. SQL script 모두 실행    
