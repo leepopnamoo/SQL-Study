@@ -1,0 +1,35 @@
+-- page 44
+
+-- 콘솔실행 
+-- 1. 윈도에서 cmd 명령으로 콘솔창 실행 
+-- 2. 디렉토리 변경 cd "C:\Program Files\PostgreSQL\13\bin" 
+-- 3. psql 실행 
+
+-- 콘솔에서 접속 명령후 암호입력(1234) 
+psql -U postgres 
+
+-- 나가기 
+\q 
+
+-- 데이터베이스 조회 
+select datname from pg_catalog.pg_database;
+select schema_name from information_schema.schemata; 
+
+-- 사용하고자 하는 스키마 선택 
+set schema 'public'; 
+
+-- 시간조회 
+select now(); 
+select current_date; 
+
+-- page 47 
+-- https://www.postgresql.org/docs/14/multibyte.html
+
+-- 문자셋 확인 
+psql -U postgres -l 
+
+-- 클라이언트 문자셋 
+show client_encoding;
+
+
+
