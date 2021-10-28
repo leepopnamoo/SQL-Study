@@ -63,7 +63,28 @@
 > create database [database name];   
 > create schema study ;   -- 생성후 SQL로 확인 
 ``` 
+  + PostgreSQL 설치   
+  + DBeaver 설치 
+  + dvdrental 샘플 db 생성 
+  
 # 2.2 command 명령어 도구 사용 방법    
++ 콘솔실행 
+  1. 윈도에서 cmd 명령으로 콘솔창 실행 
+  2. 디렉토리 변경 
+  ```
+  cd "C:\Program Files\PostgreSQL\13\bin" 
+  ```
+  3. psql 실행 
+  ```
+  psql -U postgres   
+  ```
+  4. select 실행 
+  ```
+  select now(); 
+  ```   
+  
+![콘솔](../images/console_psql.jpg) 
+
 # 2.3 자료형    
 ## 2.3.1 문자 데이터   
 ## 2.3.2 숫자 데이터   
