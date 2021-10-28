@@ -1,6 +1,6 @@
 # 실습자료
 # 자료를 허가 없이 다운로드 하거나 사용하실 경우 처벌받을 수 있습니다. 
-
+---   
 # 실습자료 설치방법 
 ## dvdrental sample database 
 1. dvdrental.zip 파일 다운로드 
