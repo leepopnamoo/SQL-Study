@@ -1,4 +1,9 @@
-# File System vs DBMS
+# 1.1 데이터베이스 소개 
+> 데이터베이스는 관련정보의 집합이다. 
+> 데이터베이스 시스템은 종이대신 전산화된 자료로 데이터를 저장함으로써 더 빠르게 검색하고, 다양한 방법으로 데이터를 색인화 하며, 최신 정보를 사용자에게 제공할 수 있습니다. 
+
+## 1.1.1 비관계형 데이터베이스 시스템 
+### File System vs DBMS
 |구분|File System|DBMS|
 |:----:|:---:|:---:|
 |Cost|Low|High|
@@ -9,6 +14,23 @@
 |Security|파일단위의 접근 권한|세분화된 권한 부여 가능|
 |Recovery|Difficult|There’s a way though…|
 
+## 1.1.2 관계형 모델 - RDBMS :: Relational DataBase Management System
+> 1970년 IBM 연구소의 **에드거 프랭크 커드** 박사는 '대규모 공유 데이터 뱅크를 위한 데이터의 관계형 모델'이라는 논문을 발표하고 데이터를 테이블 집항으올 나타낼 것을 제안했습니다.    
+> 테이블 **엔티티**는 **기본키**를 또는 복합키를 가지며 특성에 따라 자연키, 대리키로 구분 할 수 있다. 관계형데이터베이스에서 **참조키**(외래키)를 사용하여 Join 명령어로 엔티티간의 관계를 정의한다.    
+> 각각의 독립적인 정보가 한 위치에만 저장되도록 데이터베이스 설계를 수정하는 절차를 **정규화**라고 합니다.    
+
+# 1.2 SQL 
+> SEQUEL이라 불리는 언어가 등장했으며 이것을 짧게 **SQL**이라 부르게 되었습니다.    
+> 1980년 중반, 미국 국립 표준 연구소(American National Standards Institute::ANSI)에서 SQL언어의 최조 표준을 발표했습니다. 
+> SQL이 'Structured Query Language'를 의미한다고 주장하는 사람이 많지만, SQL은 어떤 단어의 약어가 아니다. 
+> S.Q.L이라 하거나 sequel(시퀄)이라고 함. 
+
+## 1.2.1 SQL문 분류 
+1. DDL – Data Definition Language : CREATE   
+2. DQl – Data Query Language : SELECT   
+3. DML – Data Manipulation Language : UPDATE   
+4. DCL – Data Control Language : GRANT   
+5. DTL - Data Transaction Language : COMMIT    
 
 # Install PostgreSQL :: Database Server 
 1. 설치 파일 다운로드 :   
