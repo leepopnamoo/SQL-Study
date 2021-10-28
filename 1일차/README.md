@@ -55,6 +55,8 @@
 + IBM : DB2 
 + 오픈소스 관계형 데이터베이스 : MySQL(Sun>Oracle), PostgreSQL, MariaDB 
 
+---   
+
 # 2. 데이터베이스 생성과 데이터 추가 
 # 2.1 데이터베이스 생성    
 ```
