@@ -86,7 +86,11 @@
 ![콘솔](../images/console_psql.jpg) 
 
 # 2.3 자료형    
+참조문서 <https://www.postgresql.org/docs/14/multibyte.html>
 ## 2.3.1 문자 데이터   
+> char(20)  - fixed-length 
+> varchar(20)  - variable-length 
+ 
 ## 2.3.2 숫자 데이터   
 ## 2.3.3 시간 데이터    
 # 2.4 테이블 생성   
