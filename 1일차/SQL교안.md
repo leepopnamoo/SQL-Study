@@ -14,6 +14,9 @@
 |Security|파일단위의 접근 권한|세분화된 권한 부여 가능|
 |Recovery|Difficult|There’s a way though…|
 
+### File System Oracle 
+![오라클파일시스템](../images/filesystem_oracle.png)
+
 ## 1.1.2 관계형 모델 - RDBMS :: Relational DataBase Management System
 > 1970년 IBM 연구소의 **에드거 프랭크 커드** 박사는 '대규모 공유 데이터 뱅크를 위한 데이터의 관계형 모델'이라는 논문을 발표하고 데이터를 테이블 집항으올 나타낼 것을 제안했습니다.    
 > 테이블 **엔티티**는 **기본키**를 또는 복합키를 가지며 특성에 따라 자연키, 대리키로 구분 할 수 있다. 관계형데이터베이스에서 **참조키**(외래키)를 사용하여 Join 명령어로 엔티티간의 관계를 정의한다.    
@@ -33,10 +36,23 @@
 5. DTL - Data Transaction Language : COMMIT    
 
 ## 1.2.2 비절차적 언어인 SQL   
-> SQL의 실행은 옵티마이저라는 데이터베이스 엔진에서 담당함. 
-> 사용자가 직접 힌트를 지정함으로써 옵티마이저의 결정에 영향을 줄 수 있음. (PostgreSQL 엔트프라이즈 DB와 같은 힌트기능 없음) 
+> SQL의 실행은 옵티마이저라는 데이터베이스 엔진에서 담당함.   
+> 사용자가 직접 힌트를 지정함으로써 옵티마이저의 결정에 영향을 줄 수 있음. (PostgreSQL 엔트프라이즈 DB와 같은 힌트기능 없음)    
+
 ![쿼리플랜보기](../images/sql_excute_plan.jpg)
 
+## 1.2.3 SQL 예제 
+> SELECT  하나 이상의 칼럼 정의   
+> FROM    하나 이상의 테이블 정의    
+> WHERE   하나 이상의 조건 지정     
+
+# 1.3 MySQL - PostgreSQL 
++ 오라클 : 오라클데이터베이스, Oracle v5 Client/Server 지원     
++ 마이크로소프트 : SQL 서버 (SQL Server - Sybase Server(ASE::Adaptive Server Enterprise)    
++ IBM : DB2 
++ 오픈소스 관계형 데이터베이스 : MySQL(Sun>Oracle), PostgreSQL, MariaDB 
+
+---
 
 # Install PostgreSQL :: Database Server 
 1. 설치 파일 다운로드 :   
