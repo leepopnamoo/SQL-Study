@@ -31,3 +31,10 @@
   dbeaver-ce-21.2.3-x86_64-setup.exe    
 **※ 설치시 인터넷이 연결되어 있어야 드라이브 설치가 원활합니다.** 
 
+# Connect Database 
+1. 메뉴 열기 
+  ![메뉴팝업](../images/db_connect_menu.jpg)
+2. 데이터베이스 선택 
+  ![연결설정1](../images/db_connection_pop1.jpg)
+3. 연결 설정후 완료 
+  ![연결설정2](../images/db_connection_pop2.jpg)
