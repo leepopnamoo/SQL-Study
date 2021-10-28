@@ -10,7 +10,7 @@
 |Recovery|Difficult|There’s a way though…|
 
 
-# Install PostgreSQL 
+# Install PostgreSQL :: Database Server 
 1. 설치 파일 다운로드 :   
   <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads> 
 2. 설치 파일 실행 :  
@@ -23,3 +23,11 @@
 |pg_hba.conf|ip대역별 접근권한을 설정한다. (Host Base Authentication)|
 |pg_ident.conf|사용자 계정별 접근권한을 설정한다. (pg_hba.conf method설정에 따라)|
 |postgresql.conf|서버환경 설정을 한다. 기본포트는 5432|
+
+# Install DBeaver :: SQL Tool  
+1. 설치 파일 다운로드 :
+  <https://dbeaver.io/download/> 
+2. 설치 파일 실행 :   
+  dbeaver-ce-21.2.3-x86_64-setup.exe    
+**※ 설치시 인터넷이 연결되어 있어야 드라이브 설치가 원활합니다.** 
+
