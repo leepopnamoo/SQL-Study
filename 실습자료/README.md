@@ -14,3 +14,6 @@
 
 ## ERD 
 ![ERD](../images/dvd-rental-sample-database-diagram.png) 
+
+## ERD 기호 
+![ERDSIGN](../images/erdsign.jpg) 
