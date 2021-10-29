@@ -228,13 +228,13 @@ where b like '%3%'
 and c is null ; 
 ```
 # 2.6 좋은 구문을 망치는 경우 
-# 2.6.1 고유하지 않은 기본 키    
+## 2.6.1 고유하지 않은 기본 키    
 > 파일로 관리하는 연구 분석용 자료에서 중복 자료 종종 확인.     
-# 2.6.2 존재하지 않는 외래 키   
+## 2.6.2 존재하지 않는 외래 키   
 > 검사 결과값은 있으나 환자정보가 존재하지 않는 경우.   
-# 2.6.3 열 값 위반       
+## 2.6.3 열 값 위반       
 > 성별을 'M', 'F'로 정의하였으나 그외 문자가 존재하는 경우   
-# 2.6.4 잘못된 날짜 변환   
+## 2.6.4 잘못된 날짜 변환   
 > datetime to char 
 ``` 
 select now() ;
@@ -247,9 +247,66 @@ select to_date('01022021','MMDDYYYY'), to_date('2021-12-25', 'YYYY-MM-DD');
 select to_timestamp('2021-01-01 20:12:12', 'YYYY-MM-DD HH24:MI:SS'); 
 ``` 
 
-# 2.7 샤키라 데이터베이스   
+## 2.7 샤키라 데이터베이스   
 > PostgreSQL dvdrental SAMPLE database 만들기 
 ---
+
+# 3. 쿼리입문 
+## 3.1 쿼리역학 
++ 이 구문을 실행할 권한이 있는가? 
++ 원하는 데이터에 접근 할 수 있는 권한이 있는가? 
++ 구문의 문법이 정확한가? 
+
+> 옵티미이저 - from절 조인 확인 - where절 index 확인- Query Plan - 실행    
+
+``` 
+-- dvdrental public에 생성이후 실행 
+select first_name, last_name from customer where last_name = 'Jackson';
+select * from category ;
+``` 
+
+## 3.2 쿼리절 
+
+|절이름|목적|
+|:---|:-----|
+|select|쿼리 결과에 포함할 칼럼을 결정합니다|
+|from|데이터를 검색할 테이블과, 테이블을 조인하는 방법을 식별합니다|
+|where|필요한 데이터 조건을 정의합니다|
+|group by|공통의 칼럼값을 기준으로 행을 그룹화 합니다|
+|having|그룹한 결과에 조건으로 걸러냅니다|
+|order by|하나 이상의 칼럼 기준으로 최종결과의 행을 정렬합니다|     
+
+## 3.3 Select 절  
+
+``` 
+select * from language;
+``` 
+
+### 3.3.1 열의 별칭 
+
+``` 
+select Upper(name) as name_upper, language_id as id from language;
+``` 
+
+### 3.3.2 중복제거  
+
+``` 
+select actor_id from film_actor;
+select distinct actor_id from film_actor;
+select distinct actor_id from film_actor order by actor_id;
+select distinct actor_id from film_actor order by 1;
+``` 
+## 3.4 from 절 
+### 3.4.1 테이블 유형 
+
+|명칭|설명|
+|:---:|-----|
+|영구 테이블|create table문으로 생성|
+|파생 테이블|하위 쿼리에서 반환하고 메모리에 보관된 행|
+|임시 테이블|메모리에 저장된 휘발성 데이터| 
+|가상 테이블|create view 문으로 생성|  
+
+--- 
 
 # Install PostgreSQL :: Database Server 
 1. 설치 파일 다운로드 :   
