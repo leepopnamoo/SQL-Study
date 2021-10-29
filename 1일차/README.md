@@ -60,8 +60,8 @@
 # 2. 데이터베이스 생성과 데이터 추가 
 # 2.1 데이터베이스 생성    
 ```
-> create database [database name];   
-> create schema study ;   -- 생성후 SQL로 확인 
+create database [database name];   
+create schema study ;   -- 생성후 SQL로 확인 
 ``` 
   + PostgreSQL 설치   
   + DBeaver 설치 
@@ -88,16 +88,93 @@
 # 2.3 자료형    
 참조문서 <https://www.postgresql.org/docs/14/multibyte.html>
 ## 2.3.1 문자 데이터   
-> char(20)  - fixed-length 
+> char(20)  - fixed-length    
 > varchar(20)  - variable-length 
  
 ## 2.3.2 숫자 데이터   
+
+|자료형|설명|
+|:--:|--|
+|tinyint|-128 ~ 127|
+|smallint|-32,768 ~ 32,767|
+|int|-2,147,483,648 ~ 2,147,483,647|
+|float(p,s)|-38.402823466E+38 ~ -1.175494351-38   1.175494351-38 ~ 38.402823466E+38|
+
+> float(4,2) 
+> > 4 :: 소수점 아래 부분을 포함한 자리수    
+> > 2 :: 소수점 아래 자리수 
+
 ## 2.3.3 시간 데이터    
+
+|자료형|기본형식|
+|:---:|---|
+|date|YYYY-MM-DD|
+|datetime|YYYY-MM-DD HH:MM:SS|
+|timestamp|YYYY-MM-DD HH:MM:SS|
+
+> timestamp :: 1970-01-01 ~ 2038-01-18 
+
 # 2.4 테이블 생성   
+
+> Entity를 1개 이상의 Attribute 표현한 것 
+  
 ## 2.4.1 단계 1 : 설계 
-## 2.4.2 단계 2 : 정제 
+
++ 요구서 정의 및 분석   
++ Entity 선정, 객체(Object) 
+  + Entity - COVID19 환자 
+  + 속성 - 성별, 나이, 키, 몸무게 ....   
+
+## 2.4.2 단계 2 : 정제    
+
++ 속성의 특성 및 자료 분석  
++ 중복 또는 복합열이 존재하지 않도록 정규화      
+
+> DW(Data Warehouse), 연구 분석용 레지스트리는 역(반)정규화 
+
 ## 2.4.3 단계 3 : SQL 스키마 문 생성    
+
++ 테이블 정의서 작성    
++ DDL문을 작성    
+
+> CREATE TABLE covid19 ( ... );   
+> CREATE TABLE covid19_pop ( ... );   
+
+``` 
+-- study schema에 테이블 생성 
+CREATE TABLE big ( 
+  a INT          NOT NULL,
+  b CHAR(3)      NOT NULL, 
+  c VARCHAR(3)       NULL,
+  d float(5,2)  DEFAULT 0, 
+constraint pk_big primary key(a)
+); 
+``` 
+
+```
+-- [SHOW DATABASES]
+SELECT datname FROM pg_database;
+
+-- [SHOW TABLES]
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'study';
+
+-- [SHOW COLUMNS]
+SELECT column_name FROM information_schema.columns WHERE table_name = 'big';
+``` 
+
+**NULL**이란?    
+1. 알 수 없는 항목    
+2. count 되지 않는 항목    
+3. 공백과 다른 의미    
+4. 비교 연산자 또는 IF 문에서 처리되지 않는다.  
+5. 테이블의 칼럼 정의시 NULL 허용 유무를 정의할 수 있다.    
+6. IFNUL, ISNULL, is null 등으로 확인 가능하다. 
+
 # 2.5 테이블 수정 
+```
+alter table big modify a SERIAL; 
+```
+
 ## 2.5.1 데이터 삽입  
 ## 2.5.2 데이터 수정   
 ## 2.5.3 데이터 삭제    
