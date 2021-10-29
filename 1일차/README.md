@@ -125,6 +125,8 @@ create schema study ;   -- 생성후 SQL로 확인
   + Entity - COVID19 환자 
   + 속성 - 성별, 나이, 키, 몸무게 ....   
 
++ [COVID19요구서](../실습자료/DHL-P1-300D-COVID19_코호트_V1.7.pdf) 
+
 ## 2.4.2 단계 2 : 정제    
 
 + 속성의 특성 및 자료 분석  
@@ -136,6 +138,7 @@ create schema study ;   -- 생성후 SQL로 확인
 
 + 테이블 정의서 작성    
 + DDL문을 작성    
++ [COVID19테이블정의서](../실습자료/DHL-P2-304D-DM 테이블 항목정의서_COVID19_v1.1.pdf)    
 
 > CREATE TABLE covid19 ( ... );   
 > CREATE TABLE covid19_pop ( ... );   
