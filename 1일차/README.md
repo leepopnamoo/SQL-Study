@@ -225,7 +225,7 @@ and c is null ;
 ```
 # 2.6 좋은 구문을 망치는 경우 
 # 2.6.1 고유하지 않은 기본 키    
-> 
+> 파일로 관리하는 연구 분석용 자료에서 중복 자료 종종 확인.     
 # 2.6.2 존재하지 않는 외래 키   
 > 검사 결과값은 있으나 환자정보가 존재하지 않는 경우.   
 # 2.6.3 열 값 위반       
@@ -236,7 +236,13 @@ and c is null ;
 select now() ;
 select to_char(now(), 'YYYY-MM-DD');
 select to_char(now(), 'HH24:MI:SS');
+
+select '20211029'::date, '2021-01-02'::date; 
+select date '2021-10-18';
+select to_date('01022021','MMDDYYYY'), to_date('2021-12-25', 'YYYY-MM-DD');
+select to_timestamp('2021-01-01 20:12:12', 'YYYY-MM-DD HH24:MI:SS'); 
 ``` 
+
 # 2.7 샤키라 데이터베이스   
 > PostgreSQL dvdrental SAMPLE database 만들기 
 ---
