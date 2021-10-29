@@ -143,10 +143,10 @@ create schema study ;   -- 생성후 SQL로 확인
 ``` 
 -- study schema에 테이블 생성 
 CREATE TABLE big ( 
-  a INT          NOT NULL,
+  a SERIAL       NOT NULL,
   b CHAR(3)      NOT NULL, 
   c VARCHAR(3)       NULL,
-  d float(5,2)  DEFAULT 0, 
+  d NUMERIC(5,2)  DEFAULT 0.00, 
 constraint pk_big primary key(a)
 ); 
 ``` 
@@ -172,19 +172,73 @@ SELECT column_name FROM information_schema.columns WHERE table_name = 'big';
 
 # 2.5 테이블 수정 
 ```
-alter table big modify a SERIAL; 
+alter table big alter column b TYPE CHAR(6); 
 ```
 
 ## 2.5.1 데이터 삽입  
+``` 
+-- 입력 
+insert into big (b, c, d)
+values 
+  ('1', 'a', 1.0)
+, ('2', 'b', 2.0)
+, ('3', 'c', 3.0)
+, ('11', 'aa', 11.01)
+, ('22', 'bb', 22.02)
+, ('33', 'cc', 33.03)
+, ('111', 'aaa', 111.1)
+, ('222', 'bbb', 222.2)
+, ('333', 'ccc', 333.3);
+-- 필수 항목만 입력 
+insert into big (b)
+values
+  ('1')
+, ('2')
+, ('3')
+, ('11')
+, ('22')
+, ('33');
+
+select * from big ;
+select count(c) from big ;
+``` 
 ## 2.5.2 데이터 수정   
+```
+-- 긴자료형 
+update big 
+set   c = 'NULL'
+where b = '1' 
+and   c is null ; 
+-- 수정후 입력 
+update big 
+set   c = 'NUL'
+where b = '1' 
+and   c is null ; 
+``` 
+
 ## 2.5.3 데이터 삭제    
+``` 
+-- b 칼럼이 3을 포함하고 c 가 null 인 경우 삭제 
+delete from big 
+where b like '%3%'
+and c is null ; 
+```
 # 2.6 좋은 구문을 망치는 경우 
 # 2.6.1 고유하지 않은 기본 키    
+> 
 # 2.6.2 존재하지 않는 외래 키   
-# 2.6.3 열 값 위반   
+> 검사 결과값은 있으나 환자정보가 존재하지 않는 경우.   
+# 2.6.3 열 값 위반       
+> 성별을 'M', 'F'로 정의하였으나 그외 문자가 존재하는 경우   
 # 2.6.4 잘못된 날짜 변환   
-# 2.7 샤키라 데이터베이스 
-
+> datetime to char 
+``` 
+select now() ;
+select to_char(now(), 'YYYY-MM-DD');
+select to_char(now(), 'HH24:MI:SS');
+``` 
+# 2.7 샤키라 데이터베이스   
+> PostgreSQL dvdrental SAMPLE database 만들기 
 ---
 
 # Install PostgreSQL :: Database Server 
