@@ -2,6 +2,21 @@
 ---
 # 4 데이터베이스 생성    
 ## 4.1 조건평가 
+
+<details>
+<summary>코드보기</summary>
+<div markdown="1">
+  
+```
+select * from public.customer 
+where first_name = 'Steven' and create_date > '2006.01.01';
+
+select * from public.customer 
+where first_name = 'Steven' or create_date > '2006.01.01';
+```
+</div>
+</details>  
+
 ### 4.1.1 괄호사용 
 ### 4.1.2 not 연산자 사용 
 ## 4.2 조건작성 
