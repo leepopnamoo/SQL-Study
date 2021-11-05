@@ -50,36 +50,58 @@ and create_date > '2006.01.01';
 
 ## 4.2 조건작성 
 
++ 두번 이상 내원한 사람의 대체번호, 성별, 내원건수를 구하시오. 
++ 월별 건수를 구하시오. 
++ 평균재원일수를 구하시오. 
+
+<details>
+<summary>코드보기</summary>
+<div markdown="1">   
+	
 ``` 
 -- covid19 총건수 1,571, 총인원 1,654 
 select count(1) from study.covid19; 
 select count(distinct pat_sbst_no) from study.covid19;
--- 2번 이상 내원한 감염자, 대체번호, 성별, 내원건수   
+
+-- 2번 이상 내원한 사람의 대체번호, 성별, 내원건수   
 select pat_sbst_no, sex, count(1) as cnt 
 from study.covid19 c 
 group by pat_sbst_no, sex  
 having count(1) > 1 ;
+
 -- 월별건수를 구해보세요. 
 select to_char(adm_date, 'YYYY-MM') as month, count(1) as cnt 
 from study.covid19 c 
 group by to_char(adm_date, 'YYYY-MM')
 order by 1 ;
+
 -- 평균 재원기간을 구해보세요. 
-select avg(disch_date - adm_date), min(disch_date - adm_date), max(disch_date - adm_date) 
+select avg(disch_date - adm_date) 평균재원일수, min(disch_date - adm_date), max(disch_date - adm_date) 
 from study.covid19 
 where disch_date != '2070-12-31';
+
 -- 입원일자 퇴원일자 점검 
 select min(adm_date), max(disch_date)
 from study.covid19;
+
 -- 재원기간이 0인경우 검증 
 select disch_state, disch_survive_state 
 from study.covid19 
 where (disch_date - adm_date) = 0;
 ``` 
+</div>
+</details>     
+
 ## 4.3 조건유형 
 
++ 혈액형이 엽려된 사람중 형액형별 비율을 구하시오. 
+
+<details>
+<summary>코드보기</summary>
+<div markdown="1">   
+
 ```
--- 혈액형이 입력되어 있는 사람중 형액형별 비율을 구하세요. 
+-- 혈액형이 입력된 사람중 형액형별 비율을 구하시오. 
 select abo, count(1) as cnt, (select count(1) from study.covid19 a where a.abo is not null) as total, t.total    
 from study.covid19 cross join (select count(1) as total from study.covid19 where abo is not null) t  
 where abo is not null
@@ -90,26 +112,53 @@ from study.covid19 cross join (select count(1) as total from study.covid19 where
 where abo is not null
 group by abo, t.total;
 ``` 
+</div>
+</details>      
 
 ### 4.3.1 동등조건 
 
++ 남자의 혈맥형 비율을 구하시오. 
++ 남자가 아닌 경우 혈액형 비율을 구하시오. 
+
+<details>
+<summary>코드보기</summary>
+<div markdown="1"> 
+
 ```
--- 혈액형 비뮬 남자 
+-- 혈액형 비율 남자 
 select abo, count(1) as cnt, t.total, round((count(1) / t.total::decimal) * 100.00,2) as perabo     
 from study.covid19 cross join (select count(1) as total from study.covid19 where abo is not null) t  
 where abo is not null and sex = 'M'
 group by abo, t.total;
 
--- 혈액형 비뮬 남자가 아닌 경우 
+-- 혈액형 비율 남자가 아닌 경우 
 select abo, count(1) as cnt, t.total, round((count(1) / t.total::decimal) * 100.00,2) as perabo     
 from study.covid19 cross join (select count(1) as total from study.covid19 where abo is not null) t  
 where abo is not null and sex != 'M'
 group by abo, t.total;
 
 ``` 
+</div>
+</details>      
 
 ### 4.3.2 범위조건 
 
++ pop_covid19 테이블의 ward 칼럼에서 'L'(생활지료센터)값을 아래와 같이 출력 되로록 작성하시오.  
+   
+```
+c_year|c_1m|c_2m|c_3m|c_4m|c_5m|c_6m|c_7m|c_8m|c_9m|c_10m|c_11m|c_12m|
+------|----|----|----|----|----|----|----|----|----|-----|-----|-----|
+2021  | 473| 103| 169| 832| 951| 495|1207| 785|    |     |     |     |
+2020  |    |  17|  25|   7|  12|   4|   4|  36|  53|   24|   49|  531|
+```   
++ 항목값의 social|Social|Social.|SOCIAL|사회적 단어가 있는 사람을 조회하시오.  
++ 막걸리|맥주|소주|보드카|소병|위스키|와인|양주|포도주 포함하고 있는 항목을 조회하시오. 
++ 주종을 분류하고 각 건수를 구하시오.    
+   
+<details>
+<summary>코드보기</summary>
+<div markdown="1">  
+	
 ``` 
 -- pop_covid19 ward 칼럼의 'L' 생활 지료센터에 2021년 
 -- 년도별(row) 월별(column) 건수  
@@ -147,7 +196,7 @@ select alcohol_amount,
 from study.covid19 
 order by 1 ;
 
--- (막걸리|맥주|소주|보드카|소병|위스키|와인|양주|포도주) 포함하고 있는 항목을 조회하시오.    
+-- 막걸리|맥주|소주|보드카|소병|위스키|와인|양주|포도주 포함하고 있는 항목을 조회하시오.    
 select alcohol_amount,
        case when alcohol_amount ~ '(막걸리)' then '막걸리' 
             when alcohol_amount ~ '(맥주|맥 주)' then '맥주' 
@@ -173,9 +222,29 @@ where alcohol_amount ~ '(막걸리|맥주|소주|보드카|소병|위스키|와�
 group by 1 
 order by 1 ;
 ``` 
+</div>
+</details>     
 
-### 4.3.3 멤버십조건 
+### 4.3.3 멤버십조건  
 
++ 입력된 학력구분을 조회하시오. 
++ 학력구분별 건수를 나이대별로 아래와 같이 조회하시오. 
+
+```  
+학력|c20대|c30대|c40대|c50대|c60대|c70대_이상|
+--|----|----|----|----|----|-------|
+01|   1|   4|    |   9|  61|    130|
+02|    |    |    |   1|   2|      5|
+03|   1|    |   3|  27|  65|     31|
+05|  37|  37|  88| 185| 112|     29|
+08|  31|   2|   2|   3|   1|       |
+``` 
++ covid19_pop 모집단에서 생치(L)에 입원한 사람을 기준으로 covid19 10명을 조회하시오. 
+
+<details>
+<summary>코드보기</summary>
+<div markdown="1">    
+	
 ```
 -- 입력된 학력구분을 조회하시오. 
 select distinct education  
@@ -205,7 +274,9 @@ where c.pat_sbst_no in (select p.pat_sbst_no from study.pop_covid19 p where p.wa
 limit 10
 ; 
 ``` 
-
+</div>
+</details>     
+	
 ### 4.3.4 일치조건 
 ## 4.4 Null 
 ## 4.5 학습 점검 
@@ -220,7 +291,12 @@ limit 10
 -- 1에서 9까지 row생성 
 select GENERATE_SERIES(1,9) as t;
 select unnest(ARRAY(SELECT * FROM generate_series(1, 9)));
--- 5.1.1 
+```  
+
+## 5.1 조인 
+### 5.1.1 데카르트 곱 
+
+``` 
 select a, b 
 from GENERATE_SERIES(1,9) a cross join  
      GENERATE_SERIES(1,9) b ;
@@ -232,9 +308,6 @@ select generate_series(
            interval '1 day' -- 1 month 1 year  
          ); 
 ```  
-
-## 5.1 조인 
-### 5.1.1 데카르트 곱 
 ### 5.1.2 내부 조인 
 ### 5.1.3 ANSI 조인 문법 
 ## 5.2 세 개 이상 테이블 조건 
@@ -255,6 +328,13 @@ where c.age > 60
 ### 5.2.2 테이블 재사용 
 ## 5.3 셀프 조인 
 
++ pop_covid19 테이블 하나를 이용하여 self join 으로 생활치료센터, 병원 입원이 있는 사람을 조회하시오. 
++ 생치에서 병원, 병원에서 생치로 이송된 사람을 구분하고 각 건수를 구하시오.  
+
+<details>  
+<summary>코드보기</summary>   
+<div markdown="1">        
+	
 ```   
 -- pop_covid19 테이블 하나를 이용하여 self join 으로 생활치료센터, 병원 입원이 있는 사람을 조회하시오. 
 select distinct a.pat_sbst_no
@@ -268,10 +348,11 @@ select -- a.pat_sbst_no, a.ent_date, b.ent_date,
        , count(1) as 건수 
 from study.pop_covid19 a join study.pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no)
 where a.ward = 'L' and b.ward = 'I'
-group by 1 
-; 
-```    
-
+group by 1 ;  
+```    				
+</div>
+</details>          
+					
 ## 5.4 학습 점검 
 ### 5.4.1 실습 5-1 
 ### 5.4.2 실습 5-2 
