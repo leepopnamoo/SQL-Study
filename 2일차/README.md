@@ -94,7 +94,7 @@ where (disch_date - adm_date) = 0;
 
 ## 4.3 조건유형 
 
-+ 혈액형이 엽려된 사람중 형액형별 비율을 구하시오. 
++ 혈액형이 입력된 사람중 형액형별 비율을 구하시오. 
 
 <details>
 <summary>코드보기</summary>
@@ -106,6 +106,7 @@ select abo, count(1) as cnt, (select count(1) from study.covid19 a where a.abo i
 from study.covid19 cross join (select count(1) as total from study.covid19 where abo is not null) t  
 where abo is not null
 group by abo, t.total; 
+	
 -- 혈액형별 비율 
 select abo, count(1) as cnt, t.total, round((count(1) / t.total::decimal) * 100.00,2) as perabo     
 from study.covid19 cross join (select count(1) as total from study.covid19 where abo is not null) t  
@@ -117,7 +118,7 @@ group by abo, t.total;
 
 ### 4.3.1 동등조건 
 
-+ 남자의 혈맥형 비율을 구하시오. 
++ 남자의 혈액형 비율을 구하시오. 
 + 남자가 아닌 경우 혈액형 비율을 구하시오. 
 
 <details>
@@ -160,7 +161,7 @@ c_year|c_1m|c_2m|c_3m|c_4m|c_5m|c_6m|c_7m|c_8m|c_9m|c_10m|c_11m|c_12m|
 <div markdown="1">  
 	
 ``` 
--- pop_covid19 ward 칼럼의 'L' 생활 지료센터에 2021년 
+-- pop_covid19 ward 칼럼의 'L' 생활치료센터에 2021년 
 -- 년도별(row) 월별(column) 건수  
 select to_char(ent_date, 'YYYY') as c_year, 
        sum(case when to_char(ent_date, 'MM') = '01' then 1 end) as c_1M, 
