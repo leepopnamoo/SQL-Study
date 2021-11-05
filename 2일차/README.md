@@ -22,7 +22,7 @@ where first_name = 'Steven' or create_date > '2006.01.01';
 
 ### 4.1.1 괄호사용 
 
-+ customer 테이블에서 이름이 Steven 또는 성이 Young인 사람중 이거나 생성일자가 2006.01.01 이후 자료를 조회하시오.   
++ customer 테이블에서 이름이 Steven 또는 성이 Young인 사람 생성일자가 2006.01.01 이후 자료를 조회하시오.   
 
 <details>
 <summary>코드보기</summary>
