@@ -333,9 +333,9 @@ where c.age > 60
 
 <details>  
 <summary>코드보기</summary>   
-<div markdown="1">        
-	
-```   
+<div markdown="1">          
+   	
+```     
 -- pop_covid19 테이블 하나를 이용하여 self join 으로 생활치료센터, 병원 입원이 있는 사람을 조회하시오. 
 select distinct a.pat_sbst_no
 from study.pop_covid19 a join study.pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no)
@@ -348,11 +348,11 @@ select -- a.pat_sbst_no, a.ent_date, b.ent_date,
        , count(1) as 건수 
 from study.pop_covid19 a join study.pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no)
 where a.ward = 'L' and b.ward = 'I'
-group by 1 ;  
+group by 1 ;    
 ```    				
 </div>
-</details>          
-					
+</details>             
+   				
 ## 5.4 학습 점검 
 ### 5.4.1 실습 5-1 
 ### 5.4.2 실습 5-2 
@@ -360,7 +360,7 @@ group by 1 ;
 --- 
 # 6 집합 연산자 
 ## 6.1 집합 이론  
-
+   
 ``` 
 select count(1) from (
 	select pat_sbst_no from study.pop_covid19 where ward = 'L' 
@@ -409,13 +409,13 @@ select $$빅데이터's$$ as title;
 ```   
 
 ### 7.1.1 문자열 생성 
-
+   
 ``` 
 select 'first line'||chr(10)||'second line' as multi_line;  
 ``` 
-
+   
 ### 7.1.2 문자열 조작 
-
+   
 ``` 
 -- rh 값이 있는 사람을 조회하시오 
 select rh from study.covid19 where rh is not null;
@@ -438,7 +438,15 @@ select pow(2,8);
 ### 7.2.2 숫자 자릿수 관리 
 ### 7.2.3 Signed 데이터 처리 
 ## 7.3 시간 데이터 처리 
-
+	
++ 나이대별 최소 입원일자를 구하시오.   
++ 요일별 입원건수를 구하시오. 	
++ 입원기간을 계산하시오.   	
+	
+<details>
+<summary>코드보기</summary>
+<div markdown="1">    	
+   
 ``` 
 -- 나이대별 최소 입원일자를 구하시오.  
 select 
@@ -478,7 +486,9 @@ select DATE_PART('day', disch_date::timestamp - adm_date::timestamp), disch_date
 from study.covid19
 
 ```   
-
+</div>
+</details>      
+	
 ### 7.3.1 시간대 처리 
 ### 7.3.2 시간 데이터 생성 
 ## 7.4 변환 함수 
