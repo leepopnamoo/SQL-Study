@@ -318,10 +318,11 @@ select generate_series(
 select count(1) from study.pop_covid19 where ward = 'L'; 
 select count(1) from study.pop_covid19 where ward = 'I';
 
--- 생활치표센터에서 전원된 60대 이상을 조회하시오. 
+-- 생활치료센터에서 전원된 60대 이상을 조회하시오. 
 select c.pat_sbst_no, c.pat_idx, c.age  
 from study.covid19 c join 
-     (select pat_sbst_no from study.pop_covid19 where ward = 'L') t on ( t.pat_sbst_no = c.pat_sbst_no)
+     -- (select pat_sbst_no from study.pop_covid19 where ward = 'L') t on ( t.pat_sbst_no = c.pat_sbst_no) 입원일자를 조건으로 주어야 정확한 자료가 추출됨 
+     (select a.pat_sbst_no, a.ent_date from study.pop_covid19 a where a.ward = 'L') t on ( t.pat_sbst_no = c.pat_sbst_no and t.ent_date <= c.adm_date)
 where c.age > 60     
 ;     
 ```   
