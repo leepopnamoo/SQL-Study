@@ -43,7 +43,7 @@ from covid19_death a
 ### 11.4.2 실습 11-2 
 # 12 트랜젝션   
 > 데이터베이스 connection을 복사하고 설정을 아래와 같이 변경. 
-> 
+![데이터베이스연결](../images/connectionsetup.jpg)   
 ## 12.1 다중 사용자 데이터베이스 
 ## 12.2 트랜잭션 
 ```  
