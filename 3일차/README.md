@@ -25,8 +25,21 @@ case
   when 조건n then 값n 
   [ELSE 값] 
 end 
+```
+- select 구문안에 case 문 
+- 사망자중 생활치료센터 입소 유무 구분 
+```
+select a.*,  
+       case when exists (select 1 from pop_covid19 c where c.pat_sbst_no = a.pat_sbst_no and c.ward = 'L') then '생황치료센터입소'
+            else '생활치료센터입소없음' 
+       end as 상태 
+from covid19_death a 
 ``` 
+
+
+
 ## 11.3 case 표현식의 예 
+
 ## 11.4 학습 점검 
 ### 11.4.1 실습 11-1 
 ### 11.4.2 실습 11-2 
