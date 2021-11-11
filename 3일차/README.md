@@ -13,7 +13,19 @@
 ### 10.4.3 실습 10-3 
 # 11 조건식   
 ## 11.1 조건식 
-## 11.2 case 표현식 
+## 11.2 case 표현식 - p.274 
+> case 표현식은 SQL 문법에 내장되어 있으며, select, insert, update, delete 문에 포함될 수 있습니다. 
+## 11.2.1 검색에서의 case 문 
+``` 
+case 
+  when 조건1 then 값1 
+  when 조건2 then 값2 
+  when 조건3 then 값3 
+  ... 
+  when 조건n then 값n 
+  [ELSE 값] 
+end 
+``` 
 ## 11.3 case 표현식의 예 
 ## 11.4 학습 점검 
 ### 11.4.1 실습 11-1 
