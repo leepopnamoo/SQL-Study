@@ -36,16 +36,26 @@ select a.*,
 from covid19_death a 
 ``` 
 
-
-
 ## 11.3 case 표현식의 예 
 
 ## 11.4 학습 점검 
 ### 11.4.1 실습 11-1 
 ### 11.4.2 실습 11-2 
 # 12 트랜젝션   
+> 데이터베이스 connection을 복사하고 설정을 아래와 같이 변경. 
+> 
 ## 12.1 다중 사용자 데이터베이스 
 ## 12.2 트랜잭션 
+```  
+update a 
+set c6 = (case when c6 = 'M' then '남'
+               when c6 = 'F' then '여' end) 
+;
+
+select * from a;
+
+rollback ;
+``` 
 ## 12.3 학습 점검 
 ### 12.3.1 실습 12-1 
 # 13 인덱스와 제약조건   
