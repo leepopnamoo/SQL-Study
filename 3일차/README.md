@@ -62,18 +62,9 @@ rollback ;
 select * from a; 
 ``` 
 
+### 12.1.1 lock 
 
 ## 12.2 트랜잭션 
-```  
-update a 
-set c6 = (case when c6 = 'M' then '남'
-               when c6 = 'F' then '여' end) 
-;
-
-select * from a;
-
-rollback ;
-``` 
 ## 12.3 학습 점검 
 ### 12.3.1 실습 12-1 
 # 13 인덱스와 제약조건   
