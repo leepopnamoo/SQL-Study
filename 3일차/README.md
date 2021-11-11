@@ -42,9 +42,27 @@ from covid19_death a
 ### 11.4.1 실습 11-1 
 ### 11.4.2 실습 11-2 
 # 12 트랜젝션   
-> 데이터베이스 connection을 복사하고 설정을 아래와 같이 변경. 
+> 데이터베이스 connection을 복사하고 설정을 아래와 같이 변경. (나머지 동일) 
 ![데이터베이스연결](../images/connectsetup.jpg)   
 ## 12.1 다중 사용자 데이터베이스 
+- 새로만든 창에서 1, 2를 실행 
+``` 
+-- 1 
+update a 
+set c6 = (case when c6 = 'M' then '남'
+               when c6 = 'F' then '여' end) 
+;
+-- 2 
+select * from a;
+-- 3
+rollback ;
+``` 
+- 기존 창에서 a 테이블의 값이 변경되었는지 확인 
+``` 
+select * from a; 
+``` 
+
+
 ## 12.2 트랜잭션 
 ```  
 update a 
