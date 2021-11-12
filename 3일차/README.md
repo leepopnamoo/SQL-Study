@@ -259,11 +259,24 @@ group by abo ;
 ```    
 ### 16.1.2 로컬 정렬 
 ## 16.2 순위 
+``` 
+-- rank(), row_number(), dense_rank()  
+select * from b ;
+
+select c1, c2, rank() over(), row_number() over() 
+from b ;
+
+select c1, c2, rank() over(order by c1), 
+               row_number() over(partition by c1),
+               dense_rank() over(order by c1)
+from b ;
+```   
 ### 16.2.1 순위 함수
 ### 16.2.2 다양한 순위 생성 
 ## 16.3 리포팅 함수  
 ### 16.3.1 윈도우 프레임 
 ### 16.3.2 lag() 함수와 lead() 함수 
+> 이전값, 이후값 추출 
 ### 16.3.3 group_concat() 함수 
 ## 16.4 학습 점검 
 ### 16.4.1 실습 16-1 
