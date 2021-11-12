@@ -181,6 +181,26 @@ from b ;
 select b.*, case when c4 != 0 then trunc(c1/c4,2) end as div 
 from b ;
 ```  
+### 11.3.4 조건부 업데이트 
+```
+select case when c6 = 'M' then '남'
+            when c6 = 'F' then '여' end 
+from a 
+;
+
+-- update 구분 
+update 테이블명 
+set 칼럼명 = 변경하고자하는값 
+where 조건 ;
+
+-- 문제 7 a 테이블의 c6를 M은 남 F는 여 로 변경하시오. 
+update a 
+set c6 = (case when c6 = 'M' then '남'
+               when c6 = 'F' then '여' end) 
+;
+
+select * from a ;
+``` 
 ### 11.3.5 Null 
 ```
 -- null인 경우 모두 'F'로 됨 
