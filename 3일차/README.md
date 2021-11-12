@@ -165,6 +165,29 @@ order by 1;
 -- 문제3 아래 그림과 같이 월별 사망자 수를 구하고 사망자가 없는 월은 0으로 표시하시오. 
 ![Pivot](../images/pivot.jpg)  
 
+```
+select to_char(t.t, 'YYYY') as 년, 
+       count(case when to_char(t.t, 'MM') = '01' then a.death_ymd end) as c1월,  
+       count(case when to_char(t.t, 'MM') = '02' then a.death_ymd end) as c2월,
+       count(case when to_char(t.t, 'MM') = '03' then a.death_ymd end) as c3월,
+       count(case when to_char(t.t, 'MM') = '04' then a.death_ymd end) as c4월,
+       count(case when to_char(t.t, 'MM') = '05' then a.death_ymd end) as c5월,
+       count(case when to_char(t.t, 'MM') = '06' then a.death_ymd end) as c6월,
+       count(case when to_char(t.t, 'MM') = '07' then a.death_ymd end) as c7월,
+       count(case when to_char(t.t, 'MM') = '08' then a.death_ymd end) as c8월,
+       count(case when to_char(t.t, 'MM') = '09' then a.death_ymd end) as c9월,
+       count(case when to_char(t.t, 'MM') = '10' then a.death_ymd end) as c10월,
+       count(case when to_char(t.t, 'MM') = '11' then a.death_ymd end) as c11월,
+       count(case when to_char(t.t, 'MM') = '12' then a.death_ymd end) as c12월
+from (select GENERATE_SERIES(
+           (date '2020.01.01')::timestamp,
+           (date '2022.12.31')::timestamp, interval '1 month') as t) t 
+      left outer join covid19_death a 
+           on (to_char(t.t, 'YYYY-MM') = to_char(a.death_ymd, 'YYYY-MM'))
+group by 1
+order by 1;
+``` 
+
 ### 11.3.3 나누기 오류 
 ```
 select 11/0 ;  
