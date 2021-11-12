@@ -234,6 +234,29 @@ order by table_schema,
 # 16 분석함수   
 ## 16.1 분석 함수의 개념 
 ### 16.1.1 데이터 윈도우 
+``` 
+select c.abo, round((count(1) / t.total::decimal) * 100, 2)||' %'  
+from study.covid19 c  
+     cross join (select count(1) as total from study.covid19 
+        where abo is not null and abo != '') as t 
+where c.abo is not null and c.abo != ''
+group by c.abo, t.total;
+
+-- abo가 null 또는 공백제외 
+select abo, count(1) as cnt 
+from covid19 
+where abo is not null and abo != ''
+group by abo ;
+
+-- 16.1.1 데이터 윈도우를 사용하여 전체 건수 칼럼추가 p.353
+select abo, count(1) as cnt, sum(count(1)) over() as total  
+from covid19 
+where abo is not null and abo != ''
+group by abo ;
+
+-- 문제 1 abo별 전체대비 비율을 구하시오. 
+
+```    
 ### 16.1.2 로컬 정렬 
 ## 16.2 순위 
 ### 16.2.1 순위 함수
