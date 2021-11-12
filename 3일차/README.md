@@ -1,9 +1,77 @@
 # 3 일차 
+# 실습 자료 만들기 
+``` 
+-- 테스트 테이블 생성 
+-- table a 
+-- drop table a ;
+create table a (
+c1 int not null primary key, 
+c2 char(1) not null, 
+c3 varchar null,
+c6 char(1) null 
+);
+-- table b 
+--drop table b;
+create table b (
+c1 int not null, 
+c2 char(1) not null, 
+c3 varchar null,
+c4 decimal(5,2) null,
+c5 date default now(),
+c6 char(1) null, 
+constraint pk_b primary key(c1, c2)  
+);
+-- insert data to a 
+insert into a 
+values 
+(1, 'a', '가', 'M'),
+(2, 'b', '나', 'F'),
+(3, 'c', '다', 'M'),
+(4, 'd', '라', 'F'),
+(5, 'e', '마', 'M'),
+(6, 'f', '바', 'F');
+-- insert data to b 
+insert into b (c1, c2, c3, c4, c6 )
+values 
+(1, '1', 'a', 1.1, '남'),
+(1, '2', 'a', 1.2, '남'),
+(2, '1', 'b', 2.1, '여'),
+(4, '1', 'd', 4.1, '여'),
+(6, '1', 'f', 0.0, '여'),
+(6, '2', 'f', 6.1, '여'),
+(6, '3', 'f', 6.2, null),
+(7, '1', null, 7.1, '남');
+
+select * from a ;
+select * from b ;
+
+select a.*, b.* 
+from a inner join b on (a.c1 = b.c1); 
+
+select a.*, b.* 
+from a join b on (a.c1 = b.c1);
+
+select a.*, b.* 
+from a left outer join b on (a.c1 = b.c1)
+order by 1 ;
+``` 
 ---
 # 10 조인의 심화   
 ## 10.1 Outer Join 
 
 ### 10.1.1 Left, Right Join 
+``` 
+-- 사망정보 테이블 생성 
+--drop table covid19_death ;
+create table COVID19_DEATH ( 
+PAT_SBST_NO varchar(9) not null, 
+DEATH_YN char(1) not null, 
+DEATH_YMD date not null, 
+constraint pk_covid_death primary key (PAT_SBST_NO)
+); 
+-- csv 자료 가져오기 
+select * from covid19_death;
+``` 
 ### 10.1.2 3 way outer join 
 ## 10.2 교차 조인 
 ## 10.3 자연 조인 
