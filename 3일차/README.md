@@ -58,7 +58,22 @@ order by 1 ;
 ---
 # 10 조인의 심화   
 ## 10.1 Outer Join 
+``` 
+-- 10.1 문제 1 covid19 테이블과 pop_covid19 테이블을 join하여 입원 한사람 중 100세 이상이면서 여자인 사람의 pat_sbst_no, ent_date, sex, age, adm_date를 조회하시오.   
+select b.pat_sbst_no, b.ent_date, a.sex, a.age, a.adm_date 
+from covid19 a join pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no)
+where b.ward = 'I' and a.age >= 100 and a.sex = 'F';
 
+-- 10.1 문제 2 covid19 테이블과 pop_covid19 테이블을 join하여 생활치료센터에 입소 경험이 있는 25세 남자의 pat_sbst_no, ent_date, sex, age, adm_date를 조회하시오.
+select b.pat_sbst_no, b.ent_date, a.sex, a.age, a.adm_date
+from covid19 a join pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no and b.ward = 'L')
+where a.age = 25 and a.sex = 'M';
+
+-- 10.1 문제 3 입원한 사람중 19세 환자의 대체번호와 나이, 입원일자를 모두 조회하고 생활치료센터의 입소하였던 내원일자 이력을 표시하시오. 
+select a.pat_sbst_no, a.age, a.adm_date, b.ent_date 
+from covid19 a left outer join pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no and b.ward = 'L')
+where a.age = 19 ;
+``` 
 ### 10.1.1 Left, Right Join 
 ``` 
 -- 사망정보 테이블 생성 
@@ -74,7 +89,19 @@ select * from covid19_death;
 ``` 
 ### 10.1.2 3 way outer join 
 ## 10.2 교차 조인 
+``` 
+select a.*, b.* 
+from a cross join b ;
+``` 
 ## 10.3 자연 조인 
+```  
+-- 건수를 비교해 보고 Query Plan을 확인해보시오. 
+select count(1) 
+from covid19 a natural join pop_covid19 b ;
+
+select count(1) 
+from covid19 a join pop_covid19 b on (a.pat_sbst_no = b.pat_sbst_no);
+``` 
 ## 10.4 학습 점검 
 ### 10.4.1 실습 10-1 
 ### 10.4.2 실습 10-2 
@@ -105,7 +132,68 @@ from covid19_death a
 ``` 
 
 ## 11.3 case 표현식의 예 
+```
+-- Tip 날짜에서 월 변환하기 
+select to_char(now(), 'YYYY-MM');
 
+-- 문제1 월별 사망자 수를 구하시오.  
+select to_char(death_ymd, 'YYYY-MM') as 월, count(1) as 사망자수 
+from covid19_death 
+group by 1
+order by 1;
+
+-- 문제2 월별 사망자 수를 구하고 사망자가 없는 월은 0으로 표시하시오. 
+-- 문자 '2021.11.11'를 date로 변환 
+select '2021.11.11'::date ;
+select date '2020.01.01';
+select cast('2021.01.01' as date);
+-- 문자 '2021.11.11'를 timestamp로 변환 
+select '2021.11.11'::timestamp ;
+-- 가상의 범위값 생성 1에서 9 
+select generate_series(1, 9);
+-- 기간내 월을 생성 
+select GENERATE_SERIES((date '2020.01.01')::timestamp,(date '2021.12.31')::timestamp, interval '1 month');
+
+select to_char(t.t, 'YYYY-MM') as 월, count(a.death_ymd) as 사망자수 
+from (select GENERATE_SERIES((date '2020.01.01')::timestamp,(date '2021.12.31')::timestamp, interval '1 month') as t) t 
+      left outer join covid19_death a 
+      on (to_char(t.t, 'YYYY-MM') = to_char(death_ymd, 'YYYY-MM'))
+group by 1
+order by 1;
+``` 
+### 11.3.1  pivot  p.278  
+-- 문제3 아래 그림과 같이 월별 사망자 수를 구하고 사망자가 없는 월은 0으로 표시하시오. 
+
+### 11.3.3 나누기 오류 
+```
+select 11/0 ;  
+
+select c1/c4 from b ;
+
+-- 문제 4 0으로 나누면 오류가 발생합니다. 오류가 나지 않게 나누기 하고 모든 값을 나열하시오. 
+select b.*, case when c4 != 0 then c1/c4 end as div 
+from b ; 
+-- 문제 5 문제 4번에서 나눈값의 소수점 2자리까지 표현하고 반올림 하시오. 
+select b.*, case when c4 != 0 then round(c1/c4,2) end as div 
+from b ;
+-- 문제 6 문제 4번에서 나눈값의 소수점 2자리까지 표현하고 절사 하시오. 
+select b.*, case when c4 != 0 then trunc(c1/c4,2) end as div 
+from b ;
+```  
+### 11.3.5 Null 
+```
+-- null인 경우 모두 'F'로 됨 
+select a.c1, a.c6, b.c6  
+from a join b on (a.c1 = b.c1) 
+where a.c6 = (case when b.c6 = '남' then 'M'
+                   else 'F' end);  
+-- null인 경우 누락                    
+select a.c1, a.c6, b.c6  
+from a join b on (a.c1 = b.c1) 
+where a.c6 = (case when b.c6 = '남' then 'M'
+                   when b.c6 = '여' then 'F' end)   
+; 
+``` 
 ## 11.4 학습 점검 
 ### 11.4.1 실습 11-1 
 ### 11.4.2 실습 11-2 
