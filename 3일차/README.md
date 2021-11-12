@@ -214,6 +214,24 @@ from a join b on (a.c1 = b.c1)
 where a.c6 = (case when b.c6 = '남' then 'M'
                    when b.c6 = '여' then 'F' end)   
 ; 
+
+select c3 from b ;
+
+-- 문제 8 b테이블에 전체를 조회하고 c3 값중 null 을 '값없음'으로 표시하시오.  
+select c1, c2, 
+       case when c3 is null then '값없음'
+            else c3 end as c3, 
+       c4, c5 
+from b ;
+
+-- null 계산결과 확인 
+select 134 * null ;
+
+select ifnull(c3, '널')
+from b ;
+
+select coalesce(c3, '널', c2) 
+from b;
 ``` 
 ## 11.4 학습 점검 
 ### 11.4.1 실습 11-1 
