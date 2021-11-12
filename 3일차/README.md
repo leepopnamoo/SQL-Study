@@ -259,7 +259,10 @@ select * from a;
 ## 12.2 트랜잭션   
 - 트랜잭션의 완료는 commit, rollback 입니다. 
 - commit는 수행한 모든 작업을 database에 적용하며 
-- rollback는 이전까지 수행한 모든 작업을 작업시작전으로 되돌려 놓습니다. 
+- rollback는 이전까지 수행한 모든 작업을 작업시작전으로 되돌려 놓습니다.   
+  
+![Transaction](../images/transaction.png)  
+ 
 ## 12.3 학습 점검 
 ``` 
 -- transaction 학습점검 
