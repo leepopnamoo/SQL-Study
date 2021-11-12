@@ -42,10 +42,17 @@ from covid19_death a
 ### 11.4.1 실습 11-1 
 ### 11.4.2 실습 11-2 
 # 12 트랜젝션   
-> 데이터베이스 connection을 복사하고 설정을 아래와 같이 변경. (나머지 동일) 
+> transaction 테스트 환경구성을 위해서 아래와 같이 설정을 진행합니다. 
+> DBeaver에서 PostgreSQL에 연결돤 데이터베이스 connection을 추가로 복사하고 설정을 아래와 같이 변경. (나머지 동일) 
 ![데이터베이스연결](../images/connectsetup.jpg)   
 ## 12.1 다중 사용자 데이터베이스 
-- 새로만든 창에서 1, 2를 실행 
+- Autocommit 를 False로 설정하여 접속한 connection에서 새로운 script 창을 생성합니다. 
+- script 창에 아래 1 과 2 를 차례대로 실행합니다. 
+- 3 script는 실행하지 않아야 하며, 3 script를 실행하기 전까지는 a테이블의 c6 항목의 페이지가 locking된 상태로 
+- 유지됩니다. 
+- 4 번 script를 Autocommit True가 되어 있는 창에서 실행해 봅니다. 
+- 결과가 어떻게 보이는지 확인 합니다. 
+- 다시 script 3을 Autocommit False가 되어 있는 창에서 결과를 조호해보고 Rollback한 후 결과를 확인합니다. 
 ``` 
 -- 1 
 update a 
@@ -54,17 +61,28 @@ set c6 = (case when c6 = 'M' then '남'
 ;
 -- 2 
 select * from a;
+
 -- 3
 rollback ;
 ``` 
 - 기존 창에서 a 테이블의 값이 변경되었는지 확인 
 ``` 
+-- 4 
 select * from a; 
 ``` 
 
-### 12.1.1 lock 
-
-## 12.2 트랜잭션 
+### 12.1.1 lock  p.288 
+- 앞에서 테스트한 환경에서 동일한 Update 구문을 Autocommit False 창에서 먼저 실행하고 
+- Autocommit True 창에서 다시 실행하면 어떤 현상이 발생되지 확인을 합니다.    
+### 12.1.2 lock의 단위   
+> table lock : 테이블 단위의 lock 관리 
+> page lock : 동일한 페이지 단위의 lock을 관리(page size 2kb ~ 16kb) 
+> row lock : 하나의 행에 대해 lock 관리 
+> column lock : column 단위 lock 
+## 12.2 트랜잭션   
+- 트랜잭션의 완료는 commit, rollback 입니다. 
+- commit는 수행한 모든 작업을 database에 적용하며 
+- rollback는 이전까지 수행한 모든 작업을 작업시작전으로 되돌려 놓습니다. 
 ## 12.3 학습 점검 
 ### 12.3.1 실습 12-1 
 # 13 인덱스와 제약조건   
