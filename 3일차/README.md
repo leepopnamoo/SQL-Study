@@ -84,6 +84,53 @@ select * from a;
 - commit는 수행한 모든 작업을 database에 적용하며 
 - rollback는 이전까지 수행한 모든 작업을 작업시작전으로 되돌려 놓습니다. 
 ## 12.3 학습 점검 
+``` 
+-- transaction 학습점검 
+
+delete from a ;
+
+select * from a ;
+
+rollback ;
+
+select * from study.a ;
+
+-- save point 
+select * from a ;
+
+begin ;
+
+update a 
+set c3 = 'A'
+where c3 = '가'; 
+
+select * from a ;
+
+savepoint tran1 ;
+
+update a 
+set c3 = 'B'
+where c3 = '나';
+
+select * from a;
+
+rollback to savepoint tran1;
+
+select * from a;
+
+commit ; 
+
+select * from a ;
+
+-- 복구 
+update a 
+set c3 = '가'
+where c3 = 'A'; 
+
+commit ;
+
+select * from a ;
+``` 
 ### 12.3.1 실습 12-1 
 # 13 인덱스와 제약조건   
 ## 13.1 인덱스 
