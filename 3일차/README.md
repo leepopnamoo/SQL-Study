@@ -155,18 +155,76 @@ select * from a ;
 - Row-Source Generator : 옵티마이저가 생성한 실행계획을 SQL 엔진이 실제 실행할 수 있는 코드나 프로시저 형태로 포맷팅 합니다.
 - SQL Engine : SQL을 실행합니다.
 
+### 13.1.1 
+> index 생성 
+```
+create index idx_covid19 on covid19 (adm_date);   
+-- 다중 index 
+create index idx_covid19_adm on covid19 (adm_date, disch_date);   
+```   
 ## 13.2 제약조건 
 ## 13.3 학습 점검 
 ### 13.3.1 실습 13-1 
 ### 13.3.2 실습 13-2 
 # 14 뷰   
 ## 14.1 뷰 
+``` 
+create view summary as (
+select to_char(ent_date, 'YYYY') as 년도, count(1) as 전체건수, 
+       sum(case when to_char(ent_date, 'MM') = '01' then 1 end) as c1월,
+       sum(case when to_char(ent_date, 'MM') = '02' then 1 end) as c2월,
+       sum(case when to_char(ent_date, 'MM') = '03' then 1 end) as c3월,
+       sum(case when to_char(ent_date, 'MM') = '04' then 1 end) as c4월,
+       sum(case when to_char(ent_date, 'MM') = '05' then 1 end) as c5월,
+       sum(case when to_char(ent_date, 'MM') = '06' then 1 end) as c6월,
+       sum(case when to_char(ent_date, 'MM') = '07' then 1 end) as c7월,
+       sum(case when to_char(ent_date, 'MM') = '08' then 1 end) as c8월,
+       sum(case when to_char(ent_date, 'MM') = '09' then 1 end) as c9월,
+       sum(case when to_char(ent_date, 'MM') = '10' then 1 end) as c10월,
+       sum(case when to_char(ent_date, 'MM') = '11' then 1 end) as c11월,
+       sum(case when to_char(ent_date, 'MM') = '12' then 1 end) as c12월
+from study.pop_covid19
+group by to_char(ent_date, 'YYYY')
+order by 1 asc 
+);
+
+select * from summary ;
+``` 
 ## 14.2 뷰를 사용하는 이유 
+### 14.2.1 데이터 보안 
+> 보안이 필요한 컬럼이나 정보를 제한하여 정의할 수 있음.
+### 14.2.1 데이터의 집계 
+### 14.2.3 복잡성 숨기기 
+### 14.2.4 
+> Union 으로 병합하여 뷰테이블 생성 
 ## 14.3 갱신 가능한 뷰 
 ## 14.4 학습 점검 
 ### 14.4.1 실습 14-1 
 ### 14.4.2 실습 14-2 
 # 15 메타데이터   
+[PostgreSQL Metadata](https://www.postgresql.org/docs/9.1/catalogs.html) 
+
+```  
+select * from pg_catalog.pg_tables where tablename = 'covid19';
+
+select table_schema,
+       table_name,
+       ordinal_position as position,
+       column_name,
+       data_type,
+       case when character_maximum_length is not null
+            then character_maximum_length
+            else numeric_precision end as max_length,
+       is_nullable,
+       column_default as default_value
+from information_schema.columns
+where table_schema not in ('information_schema', 'pg_catalog')
+and table_name = 'covid19'
+order by table_schema, 
+         table_name,
+         ordinal_position;
+```          
+         
 ## 15.1 데이터에 관한 데이터 
 ## 15.2 정보 스키마 
 ## 15.3 메타데이터로 작업하기 
