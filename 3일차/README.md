@@ -146,7 +146,7 @@ select * from a ;
 |단점|예측 통계정보 요소 무시|최소 성능 보장 계획의 예측 제어 어려움|
 |사례|AND 중심 양쪽 '='시 Index Merge 사용|AND 중심 양쪽 '='시 분포도별 Index 선택| 
 
-![Optimizer](../images/optimizer.png)  
+![Optimizer](../images/Optimizer.png)  
 
 - Parser : SQL문장을 분석하여 문법 검사와 구성요소를 파악하고 이를 파싱 해서 파싱 트리를 만듭니다.
 - Query Transformer : 파싱된 SQL을 보고 같은 결과를 도출하되, 좀 더 나은 실행 계획을 갖는 SQL로 변환이 가능한지를 판단하여 변환 작업을 수행합니다. 
