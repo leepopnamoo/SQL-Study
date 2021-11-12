@@ -412,6 +412,7 @@ order by table_schema,
 ## 16.1 분석 함수의 개념 
 ### 16.1.1 데이터 윈도우 
 ``` 
+-- 윈도 함수 사용하지 않은 경우 SQL 
 select c.abo, round((count(1) / t.total::decimal) * 100, 2)||' %'  
 from study.covid19 c  
      cross join (select count(1) as total from study.covid19 
@@ -455,6 +456,14 @@ from b ;
 ### 16.3.2 lag() 함수와 lead() 함수 
 > 이전값, 이후값 추출 
 ### 16.3.3 group_concat() 함수 
+``` 
+-- 문제 1 두번이상 입원한 환자의 입원일자를 하나의 컬럼에 표시하시오. 
+select pat_sbst_no, 
+       group_concat(to_char(adm_date, 'YYYY-MM-DD') order by adm_date)
+from covid19 
+group by pat_sbst_no 
+having count(1) > 1 ;
+``` 
 ## 16.4 학습 점검 
 ### 16.4.1 실습 16-1 
 ### 16.4.2 실습 16-2 
