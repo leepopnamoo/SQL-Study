@@ -51,13 +51,13 @@ truncate table "테이블명" ;
 ``` 
 ## 울산모범식당 자료 처리 
 
-[울산모범식당현황](https://www.data.go.kr/data/15083263/fileData.do) 
+[울산모범식당현황](https://www.data.go.kr/data/15083263/fileData.do)    
 [울산모범음식점](https://data.ulsan.go.kr/user/apimng/dataset/totalView.ulsan?searchCondition=REG_TITLE&postSearch=%EB%AA%A8%EB%B2%94%EC%9D%8C%EC%8B%9D%EC%A0%90&searchRegGroup=&apiRegSid=169&regType=&orderField=VIEW_COUNT&orderSort=DESC&menuCd=DOM_000000101005000000&pageIndex=1&regGroupArr=&offerInstArr=#read/page=1&perPage=10) 
 
 ## x.1 원본자료 생성 
 ### x.1.1 CSV 파일 다운로드 
 ### x.1.2 DDL 작성 
-  > 울산 모범 식당 현황 : 테이블명 - goodrest 
+  > 울산 모범 식당 현황 : 테이블명 - goodrest     
   > 울산 모범 음식점 현황 : 테이블명 - bestrest 
 ### x.1.3 DATA Import 
 
