@@ -53,6 +53,9 @@ delete from "테이블명" ;
 -- 테이블 비우기 
 truncate table "테이블명" ; 
 ``` 
+## text editor 
+[텍스트에디터](https://notepad-plus-plus.org/downloads/)    
+
 ## 울산모범식당 자료 처리 
 
 [울산모범식당현황](https://www.data.go.kr/data/15083263/fileData.do)    
